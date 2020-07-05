@@ -1,0 +1,129 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <cstdlib>
+#include <string> 
+using namespace std;
+const int N=20;
+const int M=5;
+struct stuborrow
+{
+	string name;
+	int cardnum;
+	string unit;
+	int passcode; 
+	int phonenum;
+	string type;
+};
+stuborrow student[N];
+
+struct librarian
+{
+	string lname;
+	int worknum;             //结构体里面要放什么啊？ 
+}
+librarian librarianinfo[M];
+
+int login()
+{
+	int wn;       //工号输入 
+	int k=0;        
+	cout<<"请输入您的工号"<<endl;
+	cin>>wn;
+	for (int i=0;i<M;i++)
+	{
+		if (wn==librarianinfo[i].worknum)
+		{
+			cout<<"请输入密码"<<endl;
+	 		k++;              //用k的大小来指示是否有对应工号 
+			return 1; 
+		}
+	}
+	if (k==0)
+	{
+		return 0;
+	}
+}
+int code()
+{
+    char ci[20],s;
+    char *cs="guanli";     //设置原始密码
+    int i,m=0;                   
+    while(m<3)  
+	{            //设置口令输入次数的限制为3
+        while((s=getch()!=13))           //输入口令并以“*”形式显示
+        {
+            if(s=='\b' && i>0) 
+            {
+                printf("\b \b");
+                --i;
+            }
+            else if(s!='\b') 
+            {
+                ci[i++]=s;
+                printf("*");
+            }
+        }
+        ci[i]= '\0'; 
+        cout<<"\n";
+        if(strcmp(ci,cs)=0)
+        {
+            cout<<"密码正确，进入系统"<<endl;
+            return 1;                              //输入密码正确，返回值为1
+        }
+        else
+        {
+            cout<<"密码错误，请重新输入"<<endl;
+            m++;
+        }  
+    }
+    cout<<"你是非法图书馆工作人员，再见！" <<endl;
+    return 0;                 //三次输入密码错误，返回值为0
+    break;
+    
+}
+
+int main 
+{
+	login();
+	if (1)
+	{
+		code();		
+	}
+	while (0)
+	{
+		cout<<"是否重新输入工号？Y-是，N-否"<<endl;
+		char s;
+		cin>>s;
+		if(s=='Y'||s=='y') 
+		login();
+		else if (s=='N'||s=='n')
+		break;
+	}
+}
+
+
+void studentappend()
+{
+	for (int i=0;i<N;i++)
+	{
+		if (stuborrow.cardnum[i]==0)
+		{
+			cout<<"请输入要添加的学生的信息"<<endl;
+			cout<<"请输入读者姓名"<<endl;
+			cin>>stuborrow[i].name;
+			cout<<"请输入读书卡号"<<endl;
+			cin>>stuborrow[i].cardnum;
+			cout<<"请输入读者所在单位"<<endl;	
+			cin>>stuborrow[i].unit;
+			cout<<"请输入读书卡密码"<<endl;	
+			cin>>stuborrow[i].passcode;
+			cout<<"请输入手机号码"<<endl;	
+			cin>>stuborrow[i].phonenum;
+			cout<<"请输入读者分类对应序号（1-本科生，2-研究生，3-教师）"<<endl;
+			cin>>stuborrow[i].type;
+			//或者要不要搞用数字录入类别（1-本科生，2-研究生，3-教师）	
+			
+		}
+	}
+}
